@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0555962527C81333002CD464 /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555962427C81333002CD464 /* ApiCaller.swift */; };
+		0555962727C81854002CD464 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555962627C81854002CD464 /* Movie.swift */; };
+		0555962927C81FC5002CD464 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555962827C81FC5002CD464 /* Extensions.swift */; };
+		0555962B27C8217C002CD464 /* Tv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555962A27C8217C002CD464 /* Tv.swift */; };
+		055E8E1127C7578400725D7C /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E8E1027C7578400725D7C /* HeroHeaderUIView.swift */; };
 		058D7C9727C6CC7F007EE7D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058D7C9627C6CC7F007EE7D7 /* AppDelegate.swift */; };
 		058D7C9927C6CC7F007EE7D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058D7C9827C6CC7F007EE7D7 /* SceneDelegate.swift */; };
 		058D7C9B27C6CC7F007EE7D7 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058D7C9A27C6CC7F007EE7D7 /* MainTabBarVC.swift */; };
@@ -20,6 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0555962427C81333002CD464 /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
+		0555962627C81854002CD464 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		0555962827C81FC5002CD464 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0555962A27C8217C002CD464 /* Tv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tv.swift; sourceTree = "<group>"; };
+		055E8E1027C7578400725D7C /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
 		058D7C9327C6CC7F007EE7D7 /* Netflix Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Netflix Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		058D7C9627C6CC7F007EE7D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		058D7C9827C6CC7F007EE7D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				058D7CB927C6D506007EE7D7 /* CollectionViewTableViewCell.swift */,
+				055E8E1027C7578400725D7C /* HeroHeaderUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -100,6 +111,8 @@
 		058D7CB427C6D48F007EE7D7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0555962627C81854002CD464 /* Movie.swift */,
+				0555962A27C8217C002CD464 /* Tv.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -124,6 +137,7 @@
 		058D7CB727C6D4D7007EE7D7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				0555962427C81333002CD464 /* ApiCaller.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -131,6 +145,7 @@
 		058D7CB827C6D4E1007EE7D7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0555962827C81FC5002CD464 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -164,6 +179,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
+				ORGANIZATIONNAME = rtrjmishra;
 				TargetAttributes = {
 					058D7C9227C6CC7F007EE7D7 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -208,11 +224,16 @@
 				058D7CB027C6CEFF007EE7D7 /* SearchVC.swift in Sources */,
 				058D7C9B27C6CC7F007EE7D7 /* MainTabBarVC.swift in Sources */,
 				058D7CBA27C6D506007EE7D7 /* CollectionViewTableViewCell.swift in Sources */,
+				055E8E1127C7578400725D7C /* HeroHeaderUIView.swift in Sources */,
 				058D7CAC27C6CEB3007EE7D7 /* HomeVC.swift in Sources */,
 				058D7C9727C6CC7F007EE7D7 /* AppDelegate.swift in Sources */,
 				058D7CB227C6CF1A007EE7D7 /* DownloadsVC.swift in Sources */,
+				0555962927C81FC5002CD464 /* Extensions.swift in Sources */,
 				058D7CAE27C6CEE0007EE7D7 /* UpcomingVC.swift in Sources */,
 				058D7C9927C6CC7F007EE7D7 /* SceneDelegate.swift in Sources */,
+				0555962727C81854002CD464 /* Movie.swift in Sources */,
+				0555962B27C8217C002CD464 /* Tv.swift in Sources */,
+				0555962527C81333002CD464 /* ApiCaller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

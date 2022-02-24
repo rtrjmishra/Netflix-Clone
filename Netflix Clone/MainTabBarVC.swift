@@ -15,12 +15,13 @@ class MainTabBarVC: UITabBarController
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        
+        //MARK: Tab bars declaration
         let vc1 = UINavigationController(rootViewController: HomeVC())
         let vc2 = UINavigationController(rootViewController: UpcomingVC())
         let vc3 = UINavigationController(rootViewController: SearchVC())
         let vc4 = UINavigationController(rootViewController: DownloadsVC())
         
+        //MARK: -Tab bar image and title name and colour
         vc1.tabBarItem.image = UIImage(systemName: "house")
         vc2.tabBarItem.image = UIImage(systemName: "play.circle")
         vc3.tabBarItem.image = UIImage(systemName: "magnifyingglass")
@@ -34,6 +35,7 @@ class MainTabBarVC: UITabBarController
         tabBar.tintColor = .label
         
         
+        //MARK: -Setting up tab bars
         setViewControllers([vc1,vc2,vc3,vc4], animated: true)
     }
 

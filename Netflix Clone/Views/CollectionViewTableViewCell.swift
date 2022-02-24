@@ -9,8 +9,10 @@ import UIKit
 
 class CollectionViewTableViewCell: UITableViewCell
 {
+    //MARK: -Identifier
     static let identifier = "CollectionViewTableViewCell"
     
+    //MARK: -Collection View initialization
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -44,6 +46,7 @@ class CollectionViewTableViewCell: UITableViewCell
     
 }
 
+//MARK: -Collection View Extensions
 extension CollectionViewTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource
 {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
