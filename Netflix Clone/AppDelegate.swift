@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 24/02/22.
+//  Created by Rituraj Mishra on 24/03/22.
 //
 
 import UIKit
@@ -10,8 +10,6 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

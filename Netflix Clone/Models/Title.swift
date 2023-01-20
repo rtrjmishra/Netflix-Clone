@@ -2,19 +2,17 @@
 //  Movie.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 25/02/22.
+//  Created by Rituraj Mishra on 25/03/22.
 //  Copyright © 2022 rtrjmishra. All rights reserved.
 //
 
 import Foundation
 
-struct TrendingTitleResponse: Codable
-{
+struct TrendingTitleResponse: Codable {
     let results: [Title]
 }
 
-struct Title: Codable
-{
+struct Title: Codable {
     let id: Int
     let media_type: String?
     let original_name: String?

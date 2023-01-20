@@ -2,14 +2,13 @@
 //  TitleTableViewCell.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 25/02/22.
+//  Created by Rituraj Mishra on 25/03/22.
 //  Copyright © 2022 rtrjmishra. All rights reserved.
 //
 
 import UIKit
 
-class TitleTableViewCell: UITableViewCell
-{
+class TitleTableViewCell: UITableViewCell{
     static let identifier = "TitleTableViewCell"
     
     private let  titlePosterImageView: UIImageView = {
@@ -37,8 +36,7 @@ class TitleTableViewCell: UITableViewCell
         return btn
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
-    {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(titlePosterImageView)
@@ -48,8 +46,7 @@ class TitleTableViewCell: UITableViewCell
         applyConstraints()
     }
     
-    private func applyConstraints()
-    {
+    private func applyConstraints(){
         NSLayoutConstraint.activate([
             titlePosterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 5),
             titlePosterImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
@@ -70,22 +67,18 @@ class TitleTableViewCell: UITableViewCell
         
     }
     
-    public func configure(with model: TitleViewModel)
-    {
+    public func configure(with model: TitleViewModel){
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(model.posterURL)") else {return}
         
         titlePosterImageView.sd_setImage(with: url, completed: nil)
         titleLabel.text = model.titleName
     }
-    
-    override func layoutSubviews()
-    {
+
+    override func layoutSubviews(){
         super.layoutSubviews()
     }
     
-    required init?(coder: NSCoder)
-    {
+    required init?(coder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

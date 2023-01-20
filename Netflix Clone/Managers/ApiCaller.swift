@@ -2,7 +2,7 @@
 //  ApiCaller.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 25/02/22.
+//  Created by Rituraj Mishra on 25/03/22.
 //  Copyright © 2022 rtrjmishra. All rights reserved.
 //
 
@@ -51,7 +51,7 @@ class ApiCaller
             guard let data = data, error == nil else {return }
             
             do{
-                let results = try JSONDecoder().decode(TrendingTitleResponse .self, from: data)
+                let results = try JSONDecoder().decode(TrendingTitleResponse.self, from: data)
                 completion(.success(results.results))
             }catch{
                 completion(.failure(APIError.failedTogetData))

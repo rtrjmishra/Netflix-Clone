@@ -2,12 +2,11 @@
 //  HeroHeaderUIView.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 24/02/22.
+//  Created by Rituraj Mishra on 24/03/22.
 //
 
 import UIKit
-class HeroHeaderUIView: UIView
-{
+class HeroHeaderUIView: UIView{
     //MARK: -Header image
     private let heroImageView: UIImageView = {
         let image = UIImageView()
@@ -39,8 +38,7 @@ class HeroHeaderUIView: UIView
         return btn
     }()
     
-    override init(frame: CGRect)
-    {
+    override init(frame: CGRect){
         super .init(frame: frame)
         
         addSubview(heroImageView)
@@ -52,8 +50,7 @@ class HeroHeaderUIView: UIView
         applyConstraints()
     }
     
-    override func layoutSubviews()
-    {
+    override func layoutSubviews(){
         heroImageView.frame = bounds
     }
     
@@ -63,10 +60,8 @@ class HeroHeaderUIView: UIView
 }
 
 //MARK: -ALl extra functions
-extension HeroHeaderUIView
-{
-    private func addGradient()
-    {
+extension HeroHeaderUIView{
+    private func addGradient(){
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
             UIColor.clear.cgColor,
@@ -76,8 +71,7 @@ extension HeroHeaderUIView
         layer.addSublayer(gradientLayer)
     }
     
-    private func applyConstraints()
-    {
+    private func applyConstraints(){
         NSLayoutConstraint.activate([
             playBtn.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 60),
             playBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
@@ -91,8 +85,7 @@ extension HeroHeaderUIView
         ])
     }
     
-    public func configure(with model: TitleViewModel)
-    {
+    public func configure(with model: TitleViewModel){
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(model.posterURL)") else {return}
         
         heroImageView.sd_setImage(with: url, completed: nil)

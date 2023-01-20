@@ -2,13 +2,12 @@
 //  DownloadsVC.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 24/02/22.
+//  Created by Rituraj Mishra on 24/03/22.
 //
 
 import UIKit
 
-class DownloadsVC: UIViewController
-{
+class DownloadsVC: UIViewController{
     
     private let downloadedTable: UITableView = {
         let table = UITableView()
@@ -17,10 +16,7 @@ class DownloadsVC: UIViewController
     }()
     
     private var titles: [TitleItem] = [TitleItem]()
-
-    
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(downloadedTable)
@@ -39,8 +35,7 @@ class DownloadsVC: UIViewController
         }
     }
     
-    private func fetchLocalStorage()
-    {
+    private func fetchLocalStorage(){
         DataPersistenceManager.shared.fetchingTitlesFromDatabase { [weak self] result in
             switch result{
             case .success(let title):
@@ -48,32 +43,24 @@ class DownloadsVC: UIViewController
                 DispatchQueue.main.async {
                     self?.downloadedTable.reloadData()
                 }
-                
-                
             case .failure(let error):
                 print(error.localizedDescription)
-                
             }
         }
     }
     
-    override func viewDidLayoutSubviews()
-    {
+    override func viewDidLayoutSubviews(){
         view.layoutSubviews()
         downloadedTable.frame = view.bounds
     }
-
 }
 
-extension DownloadsVC: UITableViewDataSource,UITableViewDelegate
-{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+extension DownloadsVC: UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return titles.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as? TitleTableViewCell
         else {return UITableViewCell()}
         
@@ -81,15 +68,12 @@ extension DownloadsVC: UITableViewDataSource,UITableViewDelegate
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 150
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         switch editingStyle{
-            
             case .delete:
                 DataPersistenceManager.shared.deleteTitle(model: titles[indexPath.row]) { [weak self] result in
                     switch result{
@@ -108,32 +92,24 @@ extension DownloadsVC: UITableViewDataSource,UITableViewDelegate
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
-        
         let title = titles[indexPath.row]
-        
         guard let titleName = title.original_title ?? title.original_title else {return}
-        
         ApiCaller.shared.movieWithQuery(with: titleName)
         { [weak self] result in
-            
             switch result{
             case .success(let element):
-                DispatchQueue.main.async
-                {
+                DispatchQueue.main.async{
                     let vc = TitlePreviewVC()
                     vc.configure(with: TitlePreviewViewModel(title: titleName,
                                                              youtubeView: element,
                                                              titleOverview: title.overview ?? ""))
                     self?.navigationController?.pushViewController(vc, animated: true)
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
-    
 }

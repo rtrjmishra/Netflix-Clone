@@ -2,24 +2,21 @@
 //  YoutubeSearchResponse.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 25/02/22.
+//  Created by Rituraj Mishra on 25/03/22.
 //  Copyright © 2022 rtrjmishra. All rights reserved.
 //
 
 import Foundation
 
-struct YoutubeSearchResponse: Codable
-{
+struct YoutubeSearchResponse: Codable {
     let items: [VideoElement]
 }
 
-struct VideoElement: Codable
-{
+struct VideoElement: Codable {
     let id: IdVideoElement
 }
 
-struct IdVideoElement: Codable
-{
+struct IdVideoElement: Codable {
     let kind: String
     let videoId: String
 }

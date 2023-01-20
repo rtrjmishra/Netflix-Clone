@@ -2,14 +2,13 @@
 //  HomeVC.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 24/02/22.
+//  Created by Rituraj Mishra on 24/03/22.
 //
 
 import UIKit
 
 //MARK: -Enums
-enum Sections: Int
-{
+enum Sections: Int{
     case TrendingMovies = 0
     case TrendingTv = 1
     case Popular = 2
@@ -17,17 +16,14 @@ enum Sections: Int
     case TopRated = 4
 }
 
-class HomeVC: UIViewController
-{
+class HomeVC: UIViewController{
+    
     //MARK: -Table view initilization
     private let tableView: UITableView = {
-       
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
         return tableView
     }()
-    
-    
     
     //MARK: -Header view element
     private var randomTrendingMovie: Title?
@@ -36,33 +32,24 @@ class HomeVC: UIViewController
     //MARK: -Section Titles
     let sectionTitles: [String] = ["Trending Movies","Trending Tv","Popular","Upcoming Movies", "Top Rated"]
     
-    
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        
         headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         tableView.tableHeaderView = headerView
-        
         configureNavBar()
         getHeroHeaderView()
-        
     }
     
-    override func viewDidLayoutSubviews()
-    {
+    override func viewDidLayoutSubviews(){
         super.viewDidLayoutSubviews()
-        
         tableView.frame = view.bounds
     }
     
-    private func getHeroHeaderView()
-    {
+    private func getHeroHeaderView(){
         ApiCaller.shared.getTrendingMovies { [weak self] result in
             switch result{
             case .success(let movie):
@@ -70,13 +57,11 @@ class HomeVC: UIViewController
                 self?.randomTrendingMovie = selectedTitle
                 self?.headerView?.configure(with: TitleViewModel(titleName: selectedTitle?.original_title ?? "",
                                                                  posterURL: selectedTitle?.poster_path ?? ""))
-                
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
-     
 }
 
 //MARK: -Table view Extension
@@ -86,26 +71,23 @@ extension HomeVC: UITableViewDelegate,UITableViewDataSource
         return sectionTitles.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
         
         cell.delegate = self
         
-        switch indexPath.section
-        {
+        switch indexPath.section{
         case Sections.TrendingMovies.rawValue:
             ApiCaller.shared.getTrendingMovies { results in
                 
                 switch results{
                 case .success(let movies):
                     cell.configure(with: movies)
-
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -117,7 +99,7 @@ extension HomeVC: UITableViewDelegate,UITableViewDataSource
                 switch results{
                 case .success(let movies):
                     cell.configure(with: movies)
-
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -129,7 +111,7 @@ extension HomeVC: UITableViewDelegate,UITableViewDataSource
                 switch results{
                 case .success(let movies):
                     cell.configure(with: movies)
-
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -162,7 +144,6 @@ extension HomeVC: UITableViewDelegate,UITableViewDataSource
             return UITableViewCell()
         }
         
-        
         return cell
     }
     
@@ -175,21 +156,18 @@ extension HomeVC: UITableViewDelegate,UITableViewDataSource
         return 40
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
         let defaultOffset = view.safeAreaInsets.top
         let offset = scrollView.contentOffset.y + defaultOffset
         
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0,-offset))
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
         return sectionTitles[section]
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         guard let header = view as? UITableViewHeaderFooterView else {return}
         header.textLabel?.font = .systemFont(ofSize: 18,weight: .bold)
         header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20,
@@ -202,14 +180,22 @@ extension HomeVC: UITableViewDelegate,UITableViewDataSource
 }
 
 //MARK: -Extension
-extension HomeVC
-{
-    private func configureNavBar()
-    {
-        var logoImage = UIImage(named: "nlogo")
-        logoImage = logoImage?.withRenderingMode(.alwaysOriginal)
+extension HomeVC{
+    private func configureNavBar(){
+        let size: CGFloat = 20
+        let logoImageView = UIImageView(frame: CGRect(x: 0,
+                                                      y: 0,
+                                                      width: size,
+                                                      height: size))
+        logoImageView.contentMode = .scaleAspectFill
+        logoImageView.image = UIImage(named: "nlogo")
+        let middleView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: size,
+                                              height: size))
+        middleView.addSubview(logoImageView)
+        navigationItem.titleView = middleView
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: logoImage, style: .plain, target: self, action: nil)
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .plain, target: self, action: nil)
@@ -218,17 +204,15 @@ extension HomeVC
     }
 }
 
-extension HomeVC: CollectionViewTableViewCellDelegate
-{
-    func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel)
-    {
+extension HomeVC: CollectionViewTableViewCellDelegate{
+    func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel){
         DispatchQueue.main.async { [weak self] in
             let vc = TitlePreviewVC()
             vc.configure(with: viewModel)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
-    
-    
 }
+
+
+

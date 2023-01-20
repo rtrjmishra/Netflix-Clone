@@ -2,19 +2,17 @@
 //  SearchResultsVC.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 25/02/22.
+//  Created by Rituraj Mishra on 25/03/22.
 //  Copyright © 2022 rtrjmishra. All rights reserved.
 //
 
 import UIKit
 
-protocol SearchResultsVCDelegate: AnyObject
-{
+protocol SearchResultsVCDelegate: AnyObject{
     func searchResultsVCDidTapItem(_ viewModel: TitlePreviewViewModel)
 }
 
-class SearchResultsVC: UIViewController
-{
+class SearchResultsVC: UIViewController{
     public var titles: [Title] = [Title]()
     
     public weak var delegate: SearchResultsVCDelegate?
@@ -29,8 +27,7 @@ class SearchResultsVC: UIViewController
         return collectionView
     }()
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
@@ -41,22 +38,18 @@ class SearchResultsVC: UIViewController
         
     }
     
-    override func viewDidLayoutSubviews()
-    {
+    override func viewDidLayoutSubviews(){
         super.viewDidLayoutSubviews()
         searchResultsCollectionView.frame = view.bounds
     }
 }
 
-extension SearchResultsVC: UICollectionViewDelegate,UICollectionViewDataSource
-{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+extension SearchResultsVC: UICollectionViewDelegate,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return titles.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as?
                 TitleCollectionViewCell else {return UICollectionViewCell()}
         
@@ -64,8 +57,7 @@ extension SearchResultsVC: UICollectionViewDelegate,UICollectionViewDataSource
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-    {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let title = titles[indexPath.row]
@@ -77,8 +69,8 @@ extension SearchResultsVC: UICollectionViewDelegate,UICollectionViewDataSource
             switch result{
             case .success(let element):
                 self?.delegate?.searchResultsVCDidTapItem(TitlePreviewViewModel(title: title.original_title ?? "",
-                                                                          youtubeView: element,
-                                                                          titleOverview: title.overview ?? ""))
+                                                                                youtubeView: element,
+                                                                                titleOverview: title.overview ?? ""))
             case .failure(let error):
                 print(error.localizedDescription)
             }

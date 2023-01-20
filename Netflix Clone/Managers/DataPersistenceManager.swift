@@ -2,7 +2,7 @@
 //  DataPersistantManager.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 26/02/22.
+//  Created by Rituraj Mishra on 26/03/22.
 //  Copyright © 2022 rtrjmishra. All rights reserved.
 //
 
@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class DataPersistenceManager
-{
+class DataPersistenceManager{
     enum DatabaseError: Error{
         case failedToSaveData
         case failedToFetchData
@@ -20,8 +19,7 @@ class DataPersistenceManager
     
      static let shared = DataPersistenceManager()
     
-    func downloadTitle(model: Title,completion: @escaping (Result<Void, Error>) -> Void)
-    {
+    func downloadTitle(model: Title,completion: @escaping (Result<Void, Error>) -> Void){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         
         let context = appDelegate.persistentContainer.viewContext
@@ -46,8 +44,7 @@ class DataPersistenceManager
         }
     }
     
-    func fetchingTitlesFromDatabase(completion: @escaping (Result<[TitleItem], Error>) -> Void)
-    {
+    func fetchingTitlesFromDatabase(completion: @escaping (Result<[TitleItem], Error>) -> Void){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         
         let context = appDelegate.persistentContainer.viewContext
@@ -64,8 +61,7 @@ class DataPersistenceManager
         }
     }
     
-    func deleteTitle(model: TitleItem,completion: @escaping (Result<Void,  Error>) -> Void)
-    {
+    func deleteTitle(model: TitleItem,completion: @escaping (Result<Void,  Error>) -> Void){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         
         let context = appDelegate.persistentContainer.viewContext

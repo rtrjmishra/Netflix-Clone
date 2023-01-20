@@ -140,8 +140,8 @@
 		058D7CB327C6D480007EE7D7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				058D7CB927C6D506007EE7D7 /* CollectionViewTableViewCell.swift */,
 				055E8E1027C7578400725D7C /* HeroHeaderUIView.swift */,
+				058D7CB927C6D506007EE7D7 /* CollectionViewTableViewCell.swift */,
 				0580366B27C8A87500242EFD /* TitleCollectionViewCell.swift */,
 				0547827F27C8C808001964C2 /* TitleTableViewCell.swift */,
 			);

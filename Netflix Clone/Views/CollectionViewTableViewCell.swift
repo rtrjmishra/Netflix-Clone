@@ -2,21 +2,19 @@
 //  CollectionViewTableViewCell.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 24/02/22.
+//  Created by Rituraj Mishra on 24/03/22.
 //
 
 import UIKit
 import CoreData
 
 //MARK: -Protocol
-protocol CollectionViewTableViewCellDelegate: AnyObject
-{
+protocol CollectionViewTableViewCellDelegate: AnyObject{
     func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel)
 }
 
 
-class CollectionViewTableViewCell: UITableViewCell
-{
+class CollectionViewTableViewCell: UITableViewCell{
     //MARK: -Identifier
     static let identifier = "CollectionViewTableViewCell"
     
@@ -34,10 +32,9 @@ class CollectionViewTableViewCell: UITableViewCell
     
     //MARK: -Titles Array
     private var titles: [Title] = [Title]()
-
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
-    {
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.backgroundColor = .systemYellow
@@ -47,27 +44,23 @@ class CollectionViewTableViewCell: UITableViewCell
         collectionView.dataSource = self
     }
     
-    required init?(coder: NSCoder)
-    {
+    required init?(coder: NSCoder){
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews()
-    {
+    override func layoutSubviews(){
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
     }
     
-    func configure(with titles: [Title])
-    {
+    func configure(with titles: [Title]){
         self.titles = titles
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
     }
-
-    private func downloadTitleAt(indexPath: IndexPath)
-    {
+    
+    private func downloadTitleAt(indexPath: IndexPath){
         DataPersistenceManager.shared.downloadTitle(model: titles[indexPath.row]) { result in
             switch result{
             case .success():
@@ -82,10 +75,9 @@ class CollectionViewTableViewCell: UITableViewCell
 
 //MARK: -Collection View Extensions
 @available(iOS 15.0, *)
-extension CollectionViewTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource
-{
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
+extension CollectionViewTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath)
                 as? TitleCollectionViewCell else {return UICollectionViewCell()}
         
@@ -95,13 +87,11 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate,UICollectionView
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return titles.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-    {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         collectionView.deselectItem(at: indexPath, animated: true)
         
         guard let titleName = titles[indexPath.row].original_title ?? titles[indexPath.row].original_name else {return}
@@ -126,8 +116,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate,UICollectionView
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
-    {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?{
         let config = UIContextMenuConfiguration(identifier: nil,
                                                 previewProvider: nil) {[weak self] _ in
             let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in

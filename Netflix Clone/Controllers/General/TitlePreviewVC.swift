@@ -2,17 +2,16 @@
 //  TitlePreviewVC.swift
 //  Netflix Clone
 //
-//  Created by Rituraj Mishra on 26/02/22.
+//  Created by Rituraj Mishra on 26/03/22.
 //  Copyright © 2022 rtrjmishra. All rights reserved.
 //
 
 import UIKit
 import WebKit
 
-class TitlePreviewVC: UIViewController
-{
+class TitlePreviewVC: UIViewController{
+    
     private let titleLabel: UILabel = {
-       
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22,weight: .bold)
@@ -21,7 +20,6 @@ class TitlePreviewVC: UIViewController
     }()
     
     private let overViewLabel: UILabel = {
-       
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18,weight: .regular)
@@ -31,7 +29,7 @@ class TitlePreviewVC: UIViewController
     }()
     
     private let webView: WKWebView = {
-       let web = WKWebView()
+        let web = WKWebView()
         web.translatesAutoresizingMaskIntoConstraints = false
         return web
     }()
@@ -47,8 +45,7 @@ class TitlePreviewVC: UIViewController
         return btn
     }()
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
         super.viewDidLoad()
         
         view.addSubview(webView)
@@ -57,8 +54,7 @@ class TitlePreviewVC: UIViewController
         view.addSubview(downloadBtn)
     }
     
-    override func viewDidLayoutSubviews()
-    {
+    override func viewDidLayoutSubviews(){
         super.viewDidLayoutSubviews()
         
         NSLayoutConstraint.activate([
@@ -87,15 +83,11 @@ class TitlePreviewVC: UIViewController
         ])
     }
     
-    func configure(with model: TitlePreviewViewModel)
-    {
+    func configure(with model: TitlePreviewViewModel){
         titleLabel.text = model.title
         overViewLabel.text = model.titleOverview
-        
         guard let url = URL(string: "https://www.youtube.com/embed/\(model.youtubeView.id.videoId)") else {return}
-        
         webView.load(URLRequest(url: url))
-    }
-    
+    } 
 }
 
